@@ -18,3 +18,11 @@ body {
   top: 10px;
   right: 10px;
 }
+
+.footer {
+  z-index: 999;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  padding: 10px;
+}

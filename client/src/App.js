@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import L from 'leaflet';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Card, CardText } from 'reactstrap';
 
 import userLocationURL from './user_location.svg';
 import messageLocationURL from './message_location.svg';
@@ -140,6 +141,9 @@ class App extends Component {
           valueChanged={this.valueChanged}
           formIsValid={this.formIsValid}
         />
+        <Card className="footer">
+          <CardText> Made with 💚 by <a href="https://git.io/w3cj" target="_blank">w3cj</a> - coded LIVE on <a href="https://youtube.com/CodingGardenWithCJ" target="_blank">Coding Garden with CJ</a></CardText>
+        </Card>
       </div>
     );
   }
