@@ -121,7 +121,11 @@ class App extends Component {
     const position = [this.state.location.lat, this.state.location.lng];
     return (
       <div className="map">
-        <Map className="map" center={position} zoom={this.state.zoom}>
+        <Map
+          className="map"
+          worldCopyJump={true}
+          center={position}
+          zoom={this.state.zoom}>
           <TileLayer
             attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors and Chat location by Iconika from the Noun Project"
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
