@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import L from 'leaflet';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
-import { Card, CardText } from 'reactstrap';
+import { Card, CardText, Button } from 'reactstrap';
 
 import userLocationURL from './user_location.svg';
 import messageLocationURL from './message_location.svg';
 
-import MessageCard from './MessageCard';
+import MessageCardForm from './MessageCardForm';
 import { getMessages, getLocation, sendMessage } from './API';
 
 import './App.css';
@@ -33,6 +33,7 @@ class App extends Component {
       name: '',
       message: ''
     },
+    showMessageForm: false,
     sendingMessage: false,
     sentMessage: false,
     messages: []
@@ -45,15 +46,26 @@ class App extends Component {
           messages
         });
       });
+  }
 
+  showMessageForm = () => {
+    this.setState({
+      showMessageForm: true
+    });
     getLocation()
-      .then(location => {
-        this.setState({
-          location,
-          haveUsersLocation: true,
-          zoom: 13
-        });
-      })
+    .then(location => {
+      this.setState({
+        location,
+        haveUsersLocation: true,
+        zoom: 13
+      });
+    });
+  }
+
+  cancelMessage = () => {
+    this.setState({
+      showMessageForm: false
+    });
   }
 
   formIsValid = () => {
@@ -133,16 +145,26 @@ class App extends Component {
             </Marker>
           ))}
         </Map>
-        <MessageCard
-          sendingMessage={this.state.sendingMessage}
-          sentMessage={this.state.sentMessage}
-          haveUsersLocation={this.state.haveUsersLocation}
-          formSubmitted={this.formSubmitted}
-          valueChanged={this.valueChanged}
-          formIsValid={this.formIsValid}
-        />
+        {
+          !this.state.showMessageForm ?
+          <Button className="message-form" onClick={this.showMessageForm} color="info">Add a Message</Button> :
+          !this.state.sentMessage ?
+          <MessageCardForm
+            cancelMessage={this.cancelMessage}
+            showMessageForm={this.state.showMessageForm}
+            sendingMessage={this.state.sendingMessage}
+            sentMessage={this.state.sentMessage}
+            haveUsersLocation={this.state.haveUsersLocation}
+            formSubmitted={this.formSubmitted}
+            valueChanged={this.valueChanged}
+            formIsValid={this.formIsValid}
+          /> :
+          <Card body className="thanks-form">
+            <CardText>Thanks for submitting a message!</CardText>
+          </Card>
+        }
         <Card className="footer">
-          <CardText> Made with 💚 by <a href="https://git.io/w3cj" target="_blank">w3cj</a> - coded LIVE on <a href="https://youtube.com/CodingGardenWithCJ" target="_blank">Coding Garden with CJ</a></CardText>
+          <CardText> Made with <span role="img" aria-label="love">💚</span> by <a href="https://git.io/w3cj" target="_blank" rel="noopener noreferrer">w3cj</a></CardText>
         </Card>
       </div>
     );

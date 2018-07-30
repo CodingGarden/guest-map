@@ -1,12 +1,11 @@
 import React from 'react';
 import { Card, Button, CardTitle, CardText, Form, FormGroup, Label, Input } from 'reactstrap';
 
-const MessageCard = (props) => {
+const MessageCardForm = (props) => {
   return (
     <Card body className="message-form">
       <CardTitle>Welcome to GuestM.app!</CardTitle>
       <CardText>Leave a message with your location!</CardText>
-      <CardText>Thanks for stopping by!</CardText>
       {
         !props.sendingMessage && !props.sentMessage && props.haveUsersLocation ?
           <Form onSubmit={props.formSubmitted}>
@@ -28,6 +27,7 @@ const MessageCard = (props) => {
                 id="message"
                 placeholder="Enter a message" />
             </FormGroup>
+            <Button type="cancel" color="danger" onClick={props.cancelMessage}>Cancel</Button> {' '}
             <Button type="submit" color="info" disabled={!props.formIsValid()}>Send</Button>
           </Form> :
           props.sendingMessage || !props.haveUsersLocation ? 
@@ -41,4 +41,4 @@ const MessageCard = (props) => {
   );
 };
 
-export default MessageCard;
+export default MessageCardForm;
