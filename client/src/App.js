@@ -28,7 +28,9 @@ class App extends Component {
       lng: -0.09,
     },
     haveUsersLocation: false,
-    zoom: 2,
+    zoom: 3,
+    minZoom: 3,
+    worldCopyJump: true,
     userMessage: {
       name: '',
       message: ''
@@ -109,7 +111,7 @@ class App extends Component {
     const position = [this.state.location.lat, this.state.location.lng];
     return (
       <div className="map">
-        <Map className="map" center={position} zoom={this.state.zoom}>
+        <Map className="map" center={position} zoom={this.state.zoom} minZoom={this.state.minZoom} worldCopyJump={this.state.worldCopyJump}>
           <TileLayer
             attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors and Chat location by Iconika from the Noun Project"
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
