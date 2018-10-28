@@ -77,7 +77,7 @@ class App extends Component {
       name.length > 0 && name.length <= 500 &&
       message.length > 0 && message.length <= 500;
 
-    return validMessage && this.state.haveUsersLocation ? true : false;
+    return validMessage && this.state.haveUsersLocation;
   }
 
   formSubmitted = (event) => {
